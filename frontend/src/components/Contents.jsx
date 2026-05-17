@@ -172,16 +172,30 @@ function Contents({
                 ✦ PrepWise
               </div>
 
-              <button
-                className={`inline-flex h-11 w-11 items-center justify-center rounded-full ${
-                  isDarkMode
-                    ? "border border-white/[0.08] bg-white/[0.03]"
-                    : "border border-black/[0.08] bg-black/[0.03]"
-                }`}
-                onClick={() => setMenuOpen(false)}
-              >
-                <X size={20} />
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  className={`inline-flex h-11 w-11 items-center justify-center rounded-full transition ${
+                    isDarkMode
+                      ? "bg-white/[0.1] hover:bg-white/[0.15]"
+                      : "bg-black/[0.1] hover:bg-black/[0.15]"
+                  }`}
+                  onClick={() => setIsDarkMode(!isDarkMode)}
+                >
+                  {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+                </button>
+
+                <button
+                  className={`inline-flex h-11 w-11 items-center justify-center rounded-full ${
+                    isDarkMode
+                      ? "border border-white/[0.08] bg-white/[0.03]"
+                      : "border border-black/[0.08] bg-black/[0.03]"
+                  }`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <X size={20} />
+                </button>
+              </div>
             </div>
 
             <div
