@@ -39,7 +39,7 @@ function Contents({
         // Pause before deleting
         timeout = setTimeout(() => {
           setIsDeleting(true);
-        }, 1500);
+        }, 3000);
       }
     } else {
       // Deleting
