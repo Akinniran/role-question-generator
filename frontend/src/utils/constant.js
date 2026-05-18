@@ -1,1 +1,1 @@
-export const BASE_URL="https://role-question-generator.onrender.com/api/"
+export const BASE_URL=import.meta.env.VITE_API_BASE_URL
