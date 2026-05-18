@@ -381,7 +381,7 @@ function Contents({
                   isDarkMode ? "text-white" : "text-black"
                 }`}
               >
-                AI-Generated Interview Questions
+                {jobTitle} Interview Questions
               </h2>
 
               <div className="space-y-6">
