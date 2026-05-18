@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import apiInstance from "../utils/axios";
 import { Menu, Send, X, Sun, Moon, Sparkles } from "lucide-react";
 
@@ -13,6 +13,8 @@ function Contents({
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const questionsRef = useRef(null);
 
   const texts = [
     "Generate thoughtful, role-specific interview questions instantly using AI.",
@@ -57,6 +59,12 @@ function Contents({
 
     return () => clearTimeout(timeout);
   }, [charIndex, isDeleting, textIndex]);
+
+  useEffect(() => {
+    if (questions.length > 0 && questionsRef.current) {
+      questionsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [questions]);
 
   const generateQuestions = async () => {
     if (!jobTitle.trim()) return;
@@ -329,13 +337,25 @@ function Contents({
         {/* LOADING */}
         {loading && (
           <div className="mt-10">
-            <p
-              className={`text-lg ${
+            <div
+              className={`flex items-center gap-2 ${
                 isDarkMode ? "text-zinc-400" : "text-zinc-600"
               }`}
+              aria-label="Loading"
             >
-              Generating thoughtful interview questions...
-            </p>
+              <span
+                className="inline-block w-2 h-2 rounded-full bg-current animate-bounce"
+                style={{ animationDelay: "0s" }}
+              />
+              <span
+                className="inline-block w-2 h-2 rounded-full bg-current animate-bounce"
+                style={{ animationDelay: "0.12s" }}
+              />
+              <span
+                className="inline-block w-2 h-2 rounded-full bg-current animate-bounce"
+                style={{ animationDelay: "0.24s" }}
+              />
+            </div>
           </div>
         )}
 
@@ -348,7 +368,7 @@ function Contents({
 
         {/* QUESTIONS */}
         {questions.length > 0 && (
-          <div className="mt-16 w-full max-w-4xl">
+          <div ref={questionsRef} className="mt-16 w-full max-w-4xl">
             <div
               className={`backdrop-blur-2xl rounded-[2rem] p-8 shadow-2xl ${
                 isDarkMode
