@@ -62,7 +62,17 @@ function Contents({
 
   useEffect(() => {
     if (questions.length > 0 && questionsRef.current) {
-      questionsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      // If there's a fixed header, offset the scroll so content isn't hidden behind it.
+      const header = document.querySelector("nav");
+      const headerHeight = header ? header.getBoundingClientRect().height : 0;
+      const offset = headerHeight + 16; // small extra spacing
+
+      const top =
+        questionsRef.current.getBoundingClientRect().top +
+        window.pageYOffset -
+        offset;
+
+      window.scrollTo({ top, behavior: "smooth" });
     }
   }, [questions]);
 
