@@ -105,3 +105,6 @@ wcwidth==0.6.0
 whitenoise==6.11.0
 zipp==3.23.0
 zope.interface==8.2
+
+gunicorn==26.0.0
+whitenoise==6.11.0
