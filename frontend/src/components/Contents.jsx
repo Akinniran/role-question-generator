@@ -90,7 +90,7 @@ function Contents({
       });
 
       setQuestions(response.data.questions);
-      setSearchedJobTitle(jobTitle)
+      setSearchedJobTitle(jobTitle);
     } catch (err) {
       console.error(err);
       setError("Failed to generate interview questions.");
@@ -102,7 +102,13 @@ function Contents({
   return (
     <div className="relative z-10">
       {/* HEADER */}
-      <nav className="relative z-40 flex items-center justify-between bg-transparent px-4 py-4 sm:px-6 lg:px-8 lg:py-6 gap-4">
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8 lg:py-6 gap-4 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-colors duration-300 ${
+          isDarkMode
+            ? "bg-black/40 border-b border-white/[0.06]"
+            : "bg-white/40 border-b border-black/[0.06]"
+        }`}
+      >
         {/* LOGO */}
         <div className="text-xl sm:text-2xl font-bold tracking-tight">
           ✦ PrepWise
@@ -166,87 +172,92 @@ function Contents({
         >
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
+      </nav>
 
-        {/* MOBILE MENU */}
+      {/* MOBILE MENU */}
+      <div
+        className={`fixed inset-0 z-[60] md:hidden transition-opacity duration-300 ${
+          menuOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
+        }`}
+      >
+        {/* BACKDROP */}
         <div
-          className={`fixed inset-0 z-50 md:hidden transition-all duration-300 ${
-            menuOpen
-              ? "pointer-events-auto opacity-100"
-              : "pointer-events-none opacity-0"
+          className={`absolute inset-0 backdrop-blur-2xl ${
+            isDarkMode ? "bg-black/90" : "bg-white/90"
+          }`}
+          onClick={() => setMenuOpen(false)}
+        />
+
+        {/* MENU CONTENT */}
+        <div
+          className={`relative flex h-full flex-col px-4 pt-4 pb-8 ${
+            isDarkMode ? "text-white" : "text-black"
           }`}
         >
-          <div
-            className={`absolute inset-0 backdrop-blur-2xl ${
-              isDarkMode ? "bg-black/90" : "bg-white/90"
-            }`}
-            onClick={() => setMenuOpen(false)}
-          />
+          {/* TOP BAR */}
+          <div className="flex items-center justify-between">
+            <div className="text-xl font-bold tracking-tight">✦ PrepWise</div>
 
+            <div className="flex items-center gap-3">
+              {/* THEME TOGGLE */}
+              <button
+                type="button"
+                className={`inline-flex h-11 w-11 items-center justify-center rounded-full transition ${
+                  isDarkMode
+                    ? "bg-white/[0.1] hover:bg-white/[0.15]"
+                    : "bg-black/[0.1] hover:bg-black/[0.15]"
+                }`}
+                onClick={() => setIsDarkMode(!isDarkMode)}
+              >
+                {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
+
+              {/* CLOSE BUTTON */}
+              <button
+                className={`inline-flex h-11 w-11 items-center justify-center rounded-full ${
+                  isDarkMode
+                    ? "border border-white/[0.08] bg-white/[0.03]"
+                    : "border border-black/[0.08] bg-black/[0.03]"
+                }`}
+                onClick={() => setMenuOpen(false)}
+              >
+                <X size={20} />
+              </button>
+            </div>
+          </div>
+
+          {/* MENU BODY */}
           <div
-            className={`relative flex h-full flex-col px-4 pt-4 pb-8 ${
-              isDarkMode ? "text-white" : "text-black"
+            className={`mt-10 flex-1 overflow-y-auto p-4 shadow-2xl backdrop-blur-xl rounded-[2rem] border ${
+              isDarkMode
+                ? "border-white/[0.08] bg-white/[0.03]"
+                : "border-black/[0.08] bg-black/[0.03]"
             }`}
           >
-            <div className="flex items-center justify-between">
-              <div className="text-xl font-bold tracking-tight">
-                ✦ PrepWise
-              </div>
-
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  className={`inline-flex h-11 w-11 items-center justify-center rounded-full transition ${
+            <div className="flex flex-col gap-3">
+              {navItems.map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className={`px-5 py-4 text-base font-medium transition rounded-2xl ${
                     isDarkMode
-                      ? "bg-white/[0.1] hover:bg-white/[0.15]"
-                      : "bg-black/[0.1] hover:bg-black/[0.15]"
+                      ? "text-zinc-100 hover:bg-white/[0.08]"
+                      : "text-zinc-900 hover:bg-black/[0.08]"
                   }`}
-                  onClick={() => setIsDarkMode(!isDarkMode)}
                 >
-                  {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-                </button>
-
-                <button
-                  className={`inline-flex h-11 w-11 items-center justify-center rounded-full ${
-                    isDarkMode
-                      ? "border border-white/[0.08] bg-white/[0.03]"
-                      : "border border-black/[0.08] bg-black/[0.03]"
-                  }`}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <X size={20} />
-                </button>
-              </div>
-            </div>
-
-            <div
-              className={`mt-10 flex-1 overflow-y-auto p-4 shadow-2xl backdrop-blur-xl rounded-[2rem] border ${
-                isDarkMode
-                  ? "border-white/[0.08] bg-white/[0.03]"
-                  : "border-black/[0.08] bg-black/[0.03]"
-              }`}
-            >
-              <div className="flex flex-col gap-3">
-                {navItems.map((item) => (
-                  <a
-                    key={item}
-                    href="#"
-                    className={`px-5 py-4 text-base font-medium transition rounded-2xl ${
-                      isDarkMode
-                        ? "text-zinc-100 hover:bg-white/[0.08]"
-                        : "text-zinc-900 hover:bg-black/[0.08]"
-                    }`}
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
+                  {item}
+                </a>
+              ))}
             </div>
           </div>
         </div>
-      </nav>
+      </div>
 
       {/* HERO SECTION */}
-      <div className="flex flex-col items-center justify-center px-6 pt-10 pb-20 sm:pt-16 transition-colors duration-300">
+      <div className="flex flex-col items-center justify-center px-6 pt-32 pb-20 sm:pt-40 transition-colors duration-300">
+        {" "}
         {/* BADGE */}
         <div
           className={`mb-8 px-4 py-2 rounded-full backdrop-blur-xl text-sm ${
@@ -257,7 +268,6 @@ function Contents({
         >
           ✦ AI-Powered Interview Preparation
         </div>
-
         {/* HEADING */}
         <div className="text-center max-w-5xl">
           <h1
@@ -284,7 +294,6 @@ function Contents({
             <span className="animate-pulse">|</span>
           </p>
         </div>
-
         {/* INPUT CONTAINER */}
         <div className="w-full max-w-4xl mt-16">
           <div
@@ -345,7 +354,6 @@ function Contents({
             </div>
           </div>
         </div>
-
         {/* LOADING */}
         {loading && (
           <div className="mt-10">
@@ -370,14 +378,12 @@ function Contents({
             </div>
           </div>
         )}
-
         {/* ERROR */}
         {error && (
           <div className="mt-8">
             <p className="text-red-500 text-lg">{error}</p>
           </div>
         )}
-
         {/* QUESTIONS */}
         {questions.length > 0 && (
           <div ref={questionsRef} className="mt-16 w-full max-w-4xl">

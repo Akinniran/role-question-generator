@@ -10,7 +10,7 @@ function Homepage() {
     return saved ? saved === "dark" : true;
   });
 
-  const navItems = ["Home", "Features", "Pricing", "Blog", "About"];
+  const navItems = ["Home", "About"];
 
   useEffect(() => {
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
