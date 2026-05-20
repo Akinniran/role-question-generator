@@ -10,6 +10,7 @@ function Contents({
   setMenuOpen,
 }) {
   const [jobTitle, setJobTitle] = useState("");
+  const [searchedJobTitle, setSearchedJobTitle] = useState("");
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -89,6 +90,7 @@ function Contents({
       });
 
       setQuestions(response.data.questions);
+      setSearchedJobTitle(jobTitle)
     } catch (err) {
       console.error(err);
       setError("Failed to generate interview questions.");
@@ -391,7 +393,7 @@ function Contents({
                   isDarkMode ? "text-white" : "text-black"
                 }`}
               >
-                {jobTitle} Interview Questions
+                {searchedJobTitle} Interview Questions
               </h2>
 
               <div className="space-y-6">
