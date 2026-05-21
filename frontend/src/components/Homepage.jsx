@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import apiInstance from "../utils/axios";
 
 import Contents from "./Contents";
+import Footer from "./Footer"
 
 function Homepage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -96,6 +97,8 @@ function Homepage() {
 
       {/* CONTENT */}
       <Contents  isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} navItems={navItems} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
+      <Footer isDarkMode={isDarkMode}/>
 
     </div>
   );

@@ -32,7 +32,6 @@ function Contents({
     let timeout;
 
     if (!isDeleting) {
-      // Typing
       if (charIndex < currentText.length) {
         timeout = setTimeout(() => {
           setDisplayText(currentText.slice(0, charIndex + 1));
@@ -63,10 +62,9 @@ function Contents({
 
   useEffect(() => {
     if (questions.length > 0 && questionsRef.current) {
-      // If there's a fixed header, offset the scroll so content isn't hidden behind it.
       const header = document.querySelector("nav");
       const headerHeight = header ? header.getBoundingClientRect().height : 0;
-      const offset = headerHeight + 16; // small extra spacing
+      const offset = headerHeight + 16;
 
       const top =
         questionsRef.current.getBoundingClientRect().top +
@@ -126,6 +124,17 @@ function Contents({
             <a
               key={item}
               href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (item === "Home") {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                } else if (item === "About") {
+                  const footer = document.getElementById("contact-footer");
+                  if (footer) {
+                    footer.scrollIntoView({ behavior: "smooth" });
+                  }
+                }
+              }}
               className={`transition ${
                 isDarkMode ? "hover:text-white" : "hover:text-black"
               }`}
@@ -150,13 +159,19 @@ function Contents({
           </button>
 
           <button
+            onClick={() => {
+              const footer = document.getElementById("contact-footer");
+              if (footer) {
+                footer.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
             className={`transition px-6 py-3 rounded-full font-medium ${
               isDarkMode
                 ? "bg-zinc-900 text-white hover:bg-zinc-700"
                 : "bg-zinc-200 text-black hover:bg-zinc-300"
             } shadow-lg`}
           >
-            Contact Us
+            Contact Me
           </button>
         </div>
 
@@ -175,71 +190,84 @@ function Contents({
       </nav>
 
       {/* MOBILE MENU */}
-<div
-  className={`fixed top-[72px] left-0 w-full z-[60] md:hidden transition-all duration-300 ${
-    menuOpen
-      ? "opacity-100 translate-y-0 pointer-events-auto"
-      : "opacity-0 -translate-y-4 pointer-events-none"
-  }`}
->
-  <div
-    className={`w-full backdrop-blur-2xl shadow-2xl border-t border-b ${
-      isDarkMode
-        ? "bg-black/40 border-white/[0.08]"
-        : "bg-white/40 border-black/[0.08]"
-    }`}
-  >
-    {/* CONTENT WRAPPER */}
-    <div className="px-4 py-6">
-      {/* MENU ITEMS */}
-      <div className="flex flex-col gap-3">
-        {navItems.map((item) => (
-          <a
-            key={item}
-            href="#"
-            onClick={() => setMenuOpen(false)}
-            className={`px-5 py-4 text-base font-medium transition rounded-2xl ${
-              isDarkMode
-                ? "text-zinc-100 hover:bg-white/[0.08]"
-                : "text-zinc-900 hover:bg-black/[0.08]"
-            }`}
-          >
-            {item}
-          </a>
-        ))}
-      </div>
-
-      {/* ACTIONS */}
       <div
-        className={`mt-6 pt-6 flex items-center justify-between border-t ${
-          isDarkMode ? "border-white/[0.08]" : "border-black/[0.08]"
+        className={`fixed top-[72px] left-0 w-full z-[60] md:hidden transition-all duration-300 ${
+          menuOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
-        <button
-          type="button"
-          className={`inline-flex h-11 w-11 items-center justify-center rounded-full transition ${
+        <div
+          className={`w-full backdrop-blur-2xl shadow-2xl border-t border-b ${
             isDarkMode
-              ? "bg-white/[0.1] hover:bg-white/[0.15]"
-              : "bg-black/[0.1] hover:bg-black/[0.15]"
+              ? "bg-black/40 border-white/[0.08]"
+              : "bg-white/40 border-black/[0.08]"
           }`}
-          onClick={() => setIsDarkMode(!isDarkMode)}
         >
-          {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-        </button>
+          {/* CONTENT WRAPPER */}
+          <div className="px-4 py-6">
+            {/* MENU ITEMS */}
+            <div className="flex flex-col gap-3">
+              {navItems.map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMenuOpen(false);
+                    if (item === "Home") {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
+                  className={`px-5 py-4 text-base font-medium transition rounded-2xl ${
+                    isDarkMode
+                      ? "text-zinc-100 hover:bg-white/[0.08]"
+                      : "text-zinc-900 hover:bg-black/[0.08]"
+                  }`}
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
 
-        <button
-          className={`transition px-6 py-3 rounded-full font-medium ${
-            isDarkMode
-              ? "bg-zinc-900 text-white hover:bg-zinc-700"
-              : "bg-zinc-200 text-black hover:bg-zinc-300"
-          }`}
-        >
-          Contact Us
-        </button>
+            {/* ACTIONS */}
+            <div
+              className={`mt-6 pt-6 flex items-center justify-between border-t ${
+                isDarkMode ? "border-white/[0.08]" : "border-black/[0.08]"
+              }`}
+            >
+              <button
+                type="button"
+                className={`inline-flex h-11 w-11 items-center justify-center rounded-full transition ${
+                  isDarkMode
+                    ? "bg-white/[0.1] hover:bg-white/[0.15]"
+                    : "bg-black/[0.1] hover:bg-black/[0.15]"
+                }`}
+                onClick={() => setIsDarkMode(!isDarkMode)}
+              >
+                {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
+
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  const footer = document.getElementById("contact-footer");
+                  if (footer) {
+                    footer.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className={`transition px-6 py-3 rounded-full font-medium ${
+                  isDarkMode
+                    ? "bg-zinc-900 text-white hover:bg-zinc-700"
+                    : "bg-zinc-200 text-black hover:bg-zinc-300"
+                }`}
+              >
+                Contact Me
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
 
       {/* HERO SECTION */}
       <div className="flex flex-col items-center justify-center px-6 pt-32 pb-20 sm:pt-40 transition-colors duration-300">

@@ -2,18 +2,18 @@ function Footer({ isDarkMode }) {
   const contactCards = [
     {
       label: "Email",
-      value: "your.email@example.com",
-      href: "mailto:your.email@example.com",
+      value: "akinniranoluwatosin22@gmail.com",
+      href: "mailto:akinniranoluwatosin22@gmail.com",
     },
     {
       label: "LinkedIn",
-      value: "linkedin.com/in/yourname",
-      href: "https://linkedin.com",
+      value: "https://linkedin.com/in/akinniran-oluwatosin",
+      href: "https://www.linkedin.com/in/akinniran-oluwatosin/",
     },
     {
       label: "GitHub",
-      value: "github.com/yourname",
-      href: "https://github.com",
+      value: "https://github.com/Akinniran",
+      href: "https://github.com/Akinniran",
     },
     {
       label: "Location",
@@ -45,16 +45,6 @@ function Footer({ isDarkMode }) {
             >
               Have a role, project, or opportunity in mind?
             </h2>
-
-            <p
-              className={`mt-4 max-w-xl text-base leading-7 sm:text-lg ${
-                isDarkMode ? "text-zinc-400" : "text-zinc-600"
-              }`}
-            >
-              Reach out if you want to collaborate, discuss opportunities, or
-              just say hello. I&apos;ve kept the contact details in a clean,
-              separate footer so this page stays focused and easy to scan.
-            </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
