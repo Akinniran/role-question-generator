@@ -218,6 +218,11 @@ function Contents({
                     setMenuOpen(false);
                     if (item === "Home") {
                       window.scrollTo({ top: 0, behavior: "smooth" });
+                    } else if (item === "About") {
+                      const footer = document.getElementById("contact-footer");
+                      if (footer) {
+                        footer.scrollIntoView({ behavior: "smooth" });
+                      }
                     }
                   }}
                   className={`px-5 py-4 text-base font-medium transition rounded-2xl ${
