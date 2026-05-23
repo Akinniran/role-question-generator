@@ -302,7 +302,6 @@ VITE_API_BASE_URL=http://localhost:8000/api
 **Backend** (`.env` in backend directory):
 ```
 GITHUB_TOKEN=your_azure_openai_api_key
-SECRET_KEY=your-django-secret-key
 DEBUG=True
 ```
 
