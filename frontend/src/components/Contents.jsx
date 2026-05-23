@@ -300,7 +300,7 @@ function Contents({
 
           {/* SUBTEXT */}
           <p
-            className={`text-lg md:text-xl leading-relaxed max-w-2xl mx-auto min-h-[60px] ${
+            className={`mx-auto min-h-[6.5rem] max-w-2xl text-lg leading-relaxed md:min-h-[4.5rem] md:text-xl ${
               isDarkMode ? "text-zinc-400" : "text-zinc-600"
             }`}
           >
