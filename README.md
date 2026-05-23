@@ -444,5 +444,3 @@ This project is provided as-is for educational and interview purposes.
 For questions or issues, please review the code comments and architecture documentation above.
 
 ---
-
-**Built with ❤️ as an interview project demonstrating full-stack development capabilities**

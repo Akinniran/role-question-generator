@@ -28,7 +28,7 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = 'django-insecure-tyfip&a!@it^-9d%4m@6^b8y2#rvcomoo_qrodr6kp1@-u8la_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG') == 'true'
 
 ALLOWED_HOSTS = ["*"]
 
@@ -146,7 +146,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://localhost:5173",
-    "https://role-question-generator.vercel.app/",
+    os.getenv('FRONTEND_URL', 'http://localhost:5173'),
 ]
 
 CORS_ALLOW_CREDENTIALS = True
