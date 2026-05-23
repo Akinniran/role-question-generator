@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import apiInstance from "../utils/axios";
 import { Menu, Send, X, Sun, Moon, Sparkles } from "lucide-react";
 
+
 function Contents({
   isDarkMode,
   setIsDarkMode,
