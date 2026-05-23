@@ -23,7 +23,7 @@ function Footer({ isDarkMode }) {
   ];
 
   return (
-    <footer id="contact-footer" className="relative z-10 scroll-mt-32 px-6 pb-16 sm:px-8 lg:px-12">
+    <footer id="contact-footer" className="relative scroll-mt-32 px-6 pb-16 sm:px-8 lg:px-12">
       <div
         className={`mx-auto w-full max-w-6xl overflow-hidden rounded-[2.25rem] border backdrop-blur-2xl shadow-2xl ${
           isDarkMode
