@@ -1,4 +1,4 @@
-# Role Question Generator
+# PrepWise
 
 > An AI-powered interview preparation tool that generates thoughtful, role-specific interview questions using advanced language models.
 
